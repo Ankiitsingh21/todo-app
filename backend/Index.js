@@ -3,13 +3,17 @@ const { createTodo, updateTodo } = require('./Type.js');
 const todo = require('./db.js'); // Import the todo model
 const { connect } = require('./db.js'); // Import the connect function
 const app = express();
+const cors = require('cors');
 
 app.use(express.json());
+app.use(cors());
 
 
 app.post('/todo',async (req,res)=>{
         const createPayload = req.body;
         const parsePayload = createTodo.safeParse(createPayload);
+        console.log(createPayload);
+        console.log(parsePayload);
         if(!parsePayload.success) {
                 return res.status(400).json({
                         msg:"You sent the wrong inputs",
@@ -31,7 +35,7 @@ app.get('/todos',async (req,res)=>{
         const todos = await todo.find({});
         return res.status(201).json({
                 msg:"Successfully fetched all todos",
-                data:todos
+                todos:todos
         })
 })
 
