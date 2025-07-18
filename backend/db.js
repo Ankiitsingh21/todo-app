@@ -11,22 +11,23 @@ const mongoose = require('mongoose');
 
 const connect = async () => {
     try {
-        await mongoose.connect('mongodb://localhost/twitter_Dev');
+        await mongoose.connect('mongodb://localhost:27017//todo-app');
+        console.log('Connected to MongoDB successfully');
     } catch (error) {
         console.error('Error connecting to MongoDB:', error.message);
     }
 };
 
-connect();
+// connect();
 
 const todoSchema = new mongoose.Schema({
         title:{
-                tyep: String,
-                required: true,
+                type: String,
+                // required: true,
         }
         ,description:{
                 type: String,
-                required: true,
+                // required: true,
         },
         completed:{
                 type: Boolean,
@@ -37,3 +38,4 @@ const todoSchema = new mongoose.Schema({
 const todo = mongoose.model('todos',todoSchema);
 
 module.exports = todo;
+module.exports.connect = connect;

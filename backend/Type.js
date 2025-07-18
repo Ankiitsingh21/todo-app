@@ -2,8 +2,8 @@ const zod = require('zod');
 const { de } = require('zod/v4/locales');
 
 const createTodo = zod.object({
-        title: zod.string(),
-        description: zod.string(),
+        title: zod.string().min(1),
+        description: zod.string().min(1),
 })
 
 const updateTodo = zod.object({
